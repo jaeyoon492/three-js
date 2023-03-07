@@ -63,7 +63,8 @@ setClearColor(hash | string): 컬러값을 입력하면 됨
 > Material(재질)에 따라 사물이 달리 보일수도 있기 떄문에 조명이 필요함.
 > 여러개의 조명을 추가 할 수도 있음 ( 성능 저하 )
 
-DirectionalLight(color, intensity: 빛의 강도)
+- DirectionalLight(color, intensity: 빛의 강도)
+- AmbientLight(color, intensity): 은은하게 사물 전체에 조명을 밝혀줌.
 
 ## Mesh
 
@@ -166,6 +167,15 @@ requestAnimationFrame 과 같은 기능이라 아무거나 사용해도 된다
 > three.js 에서 제공하는 유틸리티 기능
 
 - MathUtils.degToRad: Radian 각도를 degree 각도로 전환해줌
+- AxesHelper: 각 0,0,0 기준의 축을 랜더시켜 현재 사물의 치를 파악하기 편리하게 도와주는 기능
+- GridHelper: 평면좌표를 보여주어 사물의 위치를 파악하기 편리하게 도와주는 기능
+- Stats.js: 초당 프레임을 출력해주는 모듈
+  - three.js 제공 기능이 아님, **npm i stats** 로 설치
+  - stats.dom을 document.body에 append 하여 현재 fps 상태창을 출력함
+  - 반복되는 애니메이션 콜백 함수 내부에 stats.update() 함수를 넣어 현재 출력되는 애니메이션의 프레임을 업데이트 함
+- Dat.gui: Gui를 통해 사물, 카메라 같은 오브젝트를 컨트롤 할 수 있도록 해주는 모듈
+  - three.js 제공 기능이 아님, **npm i dat.gui**로 설치
+  - dat.gui를 사용하여 사물을 고정한채로 카메라 위치를 이동 시킬때, 애니메이션 변경을 캐치 하려면, 애니메이션 콜백 함수 내부, 외부에 camera.lookAt(Object)를 추가해야 한다.
 
 ## 용어
 
