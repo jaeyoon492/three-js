@@ -53,8 +53,15 @@ export default function example() {
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
+  const AxesHelper = new THREE.AxesHelper(3);
+  scene.add(AxesHelper);
+
+  const GridHelper = new THREE.GridHelper(5);
+  scene.add(GridHelper);
+
   // console.log(geometry.attributes.position.array);
   const positionArray = geometry.attributes.position.array;
+  const randomArray = [];
 
   for (let i = 0; i < positionArray.length; i += 3) {
     // 정점(Vertex) 한개의 x, y, z 좌표를 랜덤으로 조정
@@ -65,16 +72,22 @@ export default function example() {
     positionArray[x] += (Math.random() - 0.5) * 0.2;
     positionArray[y] += (Math.random() - 0.5) * 0.2;
     positionArray[z] += (Math.random() - 0.5) * 0.2;
+
+    randomArray[x] = (Math.random() - 0.5) * 0.2;
+    randomArray[y] = (Math.random() - 0.5) * 0.2;
+    randomArray[z] = (Math.random() - 0.5) * 0.2;
   }
 
   // 그리기
   const clock = new THREE.Clock();
 
   function draw() {
-    const time = clock.getElapsedTime() * 30;
+    const time = clock.getElapsedTime() * 3;
 
     for (let i = 0; i < positionArray.length; i += 3) {
-      positionArray[i] += Math.sin(time) * 0.002;
+      positionArray[i] += Math.sin(time + randomArray[i] * 100) * 0.002;
+      positionArray[i + 1] += Math.sin(time + randomArray[i + 1] * 100) * 0.002;
+      positionArray[i + 2] += Math.sin(time + randomArray[i + 2] * 100) * 0.002;
     }
 
     geometry.attributes.position.needsUpdate = true;
